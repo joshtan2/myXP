@@ -8,7 +8,7 @@ export default function LandingPage(props) {
     return (
         <div>
             
-            <button onClick={()=>Auth.federatedSignIn({provider:"Goggle"})}>Sign in w google</button>
+            <button onClick={()=>Auth.federatedSignIn({provider:"Google"})}>Sign in w google</button>
             <button onClick={checkUser}>Check user</button>
         </div>
     )
