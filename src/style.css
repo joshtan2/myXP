@@ -244,6 +244,54 @@ hr {
   padding: 0px 20px;
 }
 
+/* ALL FOR LANDING PAGE */
+
+.landing-bg {
+  background-color: #151515;
+}
+
+.landing-boys-pic {
+  position: relative;
+  object-fit: cover;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.welcome-text {
+  /* position: relative;
+  text-align: right;
+  color: white;
+  font-size: 100px;
+  padding-right: 5rem; */
+
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  text-align: right;
+
+  position: absolute;
+  font-family: 'all-round-gothic';
+  font-weight: 700;
+  font-size: 85px;
+  line-height: 100px;
+  padding-right: 11rem;
+  padding-bottom: 5rem;
+  color: #FFFFFF;
+}
+
+.landing-logo {
+  width: 200px;
+  height: 200px;
+
+}
+
+.landing-text {
+  font-family: 'all-round-gothic';
+  font-weight: 700;
+  font-size: 40px;
+  color: #FFFFFF;
+}
+
 .tourn-card {
   border-radius: 23.5px;
   /* border: 1.5px solid #000000; */
@@ -255,8 +303,19 @@ hr {
   border-radius: 23.5px 0px 0px 23.5px;
 }
 
+.tourn-place h1 {
+  margin: auto;
+}
+
+.tourn-bg {
+  background-color: #FFF9E5;
+  border-radius: 0px 23.5px 23.5px 0px;
+
+/* border-radius: 40px; */
+}
+
 .tourn-info {
-  margin: 20px;
+  margin: 10px;
 }
 
 .tourn-info div {
@@ -280,9 +339,21 @@ hr {
   font-family: 'all-round-gothic';
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 14px;
   line-height: 164.52%;
   /* or 39px */
-
   text-align: center;
 }
+
+.tourn-info img {
+  width: auto;
+  margin: auto;
+}
+
+.tourn-info div div {
+  padding: 5px; 
+}
+
+/* .test {
+  margin: auto;
+} */
