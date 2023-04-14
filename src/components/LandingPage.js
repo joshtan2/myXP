@@ -1,11 +1,25 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
-
+import { useState, useEffect } from 'react';
 export default function LandingPage(props) {
     async function checkUser() {
         const user = await Auth.currentAuthenticatedUser()
         console.log('user: ', user)
     }
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "2c338f0a-4054-44d1-a241-a1f82f6f5376");
+
+    var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+    };
+    useEffect( ()=>{
+        fetch("https://fortnite-api.com/v2/stats/br/v2?name=Prospеring", requestOptions)
+        .then(response => response.json())
+        .then(result => console.log(result.data.stats.all))
+        .catch(error => console.log('error', error));
+    })
 
     return (
         <div className='landing-bg'>

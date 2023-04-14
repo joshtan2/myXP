@@ -4,10 +4,10 @@ import { schema } from './schema';
 
 
 
-const { PlayerModel, SocialHandle, UserInfo } = initSchema(schema);
+const { PlayerModel, GameNames, UserInfo } = initSchema(schema);
 
 export {
   PlayerModel,
-  SocialHandle,
+  GameNames,
   UserInfo
 };

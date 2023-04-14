@@ -4,21 +4,21 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 
 
-type EagerSocialHandle = {
-  readonly twitter?: string | null;
-  readonly email?: string | null;
-  readonly discord?: string | null;
+type EagerGameNames = {
+  readonly fortnite?: string | null;
+  readonly callofduty?: string | null;
+  readonly rainbowsix?: string | null;
 }
 
-type LazySocialHandle = {
-  readonly twitter?: string | null;
-  readonly email?: string | null;
-  readonly discord?: string | null;
+type LazyGameNames = {
+  readonly fortnite?: string | null;
+  readonly callofduty?: string | null;
+  readonly rainbowsix?: string | null;
 }
 
-export declare type SocialHandle = LazyLoading extends LazyLoadingDisabled ? EagerSocialHandle : LazySocialHandle
+export declare type GameNames = LazyLoading extends LazyLoadingDisabled ? EagerGameNames : LazyGameNames
 
-export declare const SocialHandle: (new (init: ModelInit<SocialHandle>) => SocialHandle)
+export declare const GameNames: (new (init: ModelInit<GameNames>) => GameNames)
 
 type EagerUserInfo = {
   readonly name?: string | null;
@@ -26,7 +26,9 @@ type EagerUserInfo = {
   readonly email?: string | null;
   readonly pronouns?: string | null;
   readonly location?: string | null;
-  readonly socials?: SocialHandle | null;
+  readonly twitter?: string | null;
+  readonly youtube?: string | null;
+  readonly InGameNames?: GameNames | null;
 }
 
 type LazyUserInfo = {
@@ -35,7 +37,9 @@ type LazyUserInfo = {
   readonly email?: string | null;
   readonly pronouns?: string | null;
   readonly location?: string | null;
-  readonly socials?: SocialHandle | null;
+  readonly twitter?: string | null;
+  readonly youtube?: string | null;
+  readonly InGameNames?: GameNames | null;
 }
 
 export declare type UserInfo = LazyLoading extends LazyLoadingDisabled ? EagerUserInfo : LazyUserInfo

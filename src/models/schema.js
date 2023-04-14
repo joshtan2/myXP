@@ -71,10 +71,8 @@ export const schema = {
                             {
                                 "allow": "public",
                                 "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
+                                    "read",
+                                    "update"
                                 ]
                             }
                         ]
@@ -85,25 +83,25 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {
-        "SocialHandle": {
-            "name": "SocialHandle",
+        "GameNames": {
+            "name": "GameNames",
             "fields": {
-                "twitter": {
-                    "name": "twitter",
+                "fortnite": {
+                    "name": "fortnite",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "email": {
-                    "name": "email",
+                "callofduty": {
+                    "name": "callofduty",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "discord": {
-                    "name": "discord",
+                "rainbowsix": {
+                    "name": "rainbowsix",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -149,11 +147,25 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "socials": {
-                    "name": "socials",
+                "twitter": {
+                    "name": "twitter",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "youtube": {
+                    "name": "youtube",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "InGameNames": {
+                    "name": "InGameNames",
                     "isArray": false,
                     "type": {
-                        "nonModel": "SocialHandle"
+                        "nonModel": "GameNames"
                     },
                     "isRequired": false,
                     "attributes": []
@@ -162,5 +174,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.0",
-    "version": "624b94e436799cb0f63dfe9cc640cb9f"
+    "version": "867511564a41bf32187a566aff274dfa"
 };
