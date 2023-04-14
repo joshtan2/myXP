@@ -1,11 +1,18 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
 import { useState, useEffect } from 'react';
+import { API } from 'aws-amplify';
+import * as queries from '../graphql/queries';
 export default function LandingPage(props) {
+
+    //how to access authenticated user
     async function checkUser() {
         const user = await Auth.currentAuthenticatedUser()
         console.log('user: ', user)
+        checkModels();
     }
+
+    //how to use fortnite API 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "2c338f0a-4054-44d1-a241-a1f82f6f5376");
 
@@ -20,7 +27,11 @@ export default function LandingPage(props) {
         .then(result => console.log(result.data.stats.all))
         .catch(error => console.log('error', error));
     })
-
+    //how to check if pereson in database
+    async function checkModels(){
+    const allTodos = await API.graphql({ query: queries.listPlayerModels });
+    console.log(allTodos);
+    }
     return (
         <div className='landing-bg'>
             <div>
