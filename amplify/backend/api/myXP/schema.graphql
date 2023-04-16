@@ -1,3 +1,11 @@
+type Data @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  games: AWSJSON
+  experiences: AWSJSON
+  user_info: AWSJSON
+  profile_img: AWSJSON
+}
+
 type TestModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
@@ -13,10 +21,8 @@ type UserInfo {
   youtube: String
 }
 
-type PlayerModel @model @auth(rules: [{allow: public, operations: [read, update]}]) {
+type PlayerModel @model @auth(rules: [{allow: public, operations: [read, update, create]}]) {
   id: ID!
-  games: AWSJSON
-  experiences: AWSJSON
-  user_info: AWSJSON
+  data: AWSJSON
 }
  

@@ -1,20 +1,27 @@
 import React from 'react';
-import { Auth, graphqlOperation } from 'aws-amplify';
+import { Amplify, Auth, graphqlOperation } from 'aws-amplify';
 import { useState, useEffect } from 'react';
 import { API } from 'aws-amplify';
 import * as queries from '../graphql/queries';
 import { DataStore } from '@aws-amplify/datastore';
-import { TestModel } from '../models';
+import { TestModel, UserInfo } from '../models';
 import * as mutations from '../graphql/mutations';
 export default function LandingPage(props) {
 
     //how to access authenticated user
     async function checkUser() {
-        
+        const isLoggedIn = await Auth.currentUserInfo();
+        if (isLoggedIn){
         const user = await Auth.currentAuthenticatedUser()
-        
-        console.log('user: ', user)
-        checkModels();
+        console.log('user: ', user);
+        checkModels(user);
+        // makeTest();
+        }
+
+    }
+    async function logout(){
+        const logout = await Auth.signOut();
+        console.log(logout);
     }
 
     //how to use fortnite API 
@@ -33,7 +40,7 @@ export default function LandingPage(props) {
     //     .catch(error => console.log('error', error));
     // })
     //how to check if person in database
-    async function checkModels(){
+    async function checkModels(value){
     // const allTodos = await API.graphql({ query: queries.listPlayerModels });
     // console.log(allTodos);
     // const detail = {
@@ -44,31 +51,67 @@ export default function LandingPage(props) {
     //     query: mutations.createTestModel,
     //     variables: {input: detail}
     // })
+
     //How to fetch a single ID 
-    // const item = await API.graphql({
-    //     query: queries.getTestModel,
-    //     variables: { id: '123456' }
-    //   });
-    // console.log(item.data.getTestModel);
-    //How to update the name of a known ID
-    const todoDetails = {
-        id: '123456',
-        name: 'newName'
-      };
-      const updatedTodo = await API.graphql({ 
-        _version: 'current_version',
-        query: mutations.updateTestModel, 
-        variables: { input: todoDetails }
+    const item = await API.graphql({
+        query: queries.getPlayerModel,
+        variables: { id:value.username }
       });
-      console.log(updatedTodo);
-      
-      console.log("updated name");
+    // console.log(item.data.getTestModel);
+      if (item.data.getPlayerModel == null){
+        //we know the user does not exists and we need to make one 
+        console.log("making player model")
+        const user_info ={'name':value.attributes.name, 'email':value.attributes.email }
+        const game =  {}
+        const experiences = {experience:[]}
+        const playerData = {
+            id: value.username,
+            games: JSON.stringify(game),
+            experiences: JSON.stringify(experiences),
+            user_info: JSON.stringify(user_info),
+            profile_img:""
+        };
+        const player = await API.graphql({
+            query: mutations.createPlayerModel,
+            variables: {input:playerData}
+            // ,authMode: "AMAZON_COGNITO_USER_POOLS"
+        })
+        console.log(player);
+      }else{
+        // they already have an account
+            //How to update the name of a known ID
+        const playerModel = {
+            id: item.id,
+            games: {fortnite: 'Prospering'},
+            experiences: [{name:'title1'},{name:'title2'}],
+            user_info: {name:'james smith', email:'testemail@gmail.com'}
+        };
+        const updatedTodo = await API.graphql({ 
+            _version: 'current_version',
+            query: mutations.updatePlayerModel, 
+            variables: { input: playerModel }
+        });
+        console.log(updatedTodo);
+      }
+      console.log("create player");
+    }
+    async function makeTest(){
+        const details = {id:'12345679',
+    name:'hello world'};
+    const item = await API.graphql({
+        query: mutations.createTestModel,
+        variables: {input: details}
+    })
+    console.log("made test")
     }
     return (
         <div className='landing-bg'>
             <div>
                 <button onClick={() => Auth.federatedSignIn({ provider: "Google" })}>Sign in w google</button>
-                <button onClick={checkModels}>Check user</button>
+                <button onClick={logout }>Sign out</button>
+
+                <button onClick={checkUser}>Check user</button>
+
             </div>
             <div className='container'>
                 <div className='d-flex'>

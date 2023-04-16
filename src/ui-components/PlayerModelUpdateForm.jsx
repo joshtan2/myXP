@@ -24,34 +24,18 @@ export default function PlayerModelUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    games: "",
-    experiences: "",
-    user_info: "",
+    data: "",
   };
-  const [games, setGames] = React.useState(initialValues.games);
-  const [experiences, setExperiences] = React.useState(
-    initialValues.experiences
-  );
-  const [user_info, setUser_info] = React.useState(initialValues.user_info);
+  const [data, setData] = React.useState(initialValues.data);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = playerModelRecord
       ? { ...initialValues, ...playerModelRecord }
       : initialValues;
-    setGames(
-      typeof cleanValues.games === "string"
-        ? cleanValues.games
-        : JSON.stringify(cleanValues.games)
-    );
-    setExperiences(
-      typeof cleanValues.experiences === "string"
-        ? cleanValues.experiences
-        : JSON.stringify(cleanValues.experiences)
-    );
-    setUser_info(
-      typeof cleanValues.user_info === "string"
-        ? cleanValues.user_info
-        : JSON.stringify(cleanValues.user_info)
+    setData(
+      typeof cleanValues.data === "string"
+        ? cleanValues.data
+        : JSON.stringify(cleanValues.data)
     );
     setErrors({});
   };
@@ -68,9 +52,7 @@ export default function PlayerModelUpdateForm(props) {
   }, [idProp, playerModelModelProp]);
   React.useEffect(resetStateValues, [playerModelRecord]);
   const validations = {
-    games: [{ type: "JSON" }],
-    experiences: [{ type: "JSON" }],
-    user_info: [{ type: "JSON" }],
+    data: [{ type: "JSON" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -98,9 +80,7 @@ export default function PlayerModelUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          games,
-          experiences,
-          user_info,
+          data,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -148,82 +128,28 @@ export default function PlayerModelUpdateForm(props) {
       {...rest}
     >
       <TextAreaField
-        label="Games"
+        label="Data"
         isRequired={false}
         isReadOnly={false}
-        value={games}
+        value={data}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              games: value,
-              experiences,
-              user_info,
+              data: value,
             };
             const result = onChange(modelFields);
-            value = result?.games ?? value;
+            value = result?.data ?? value;
           }
-          if (errors.games?.hasError) {
-            runValidationTasks("games", value);
+          if (errors.data?.hasError) {
+            runValidationTasks("data", value);
           }
-          setGames(value);
+          setData(value);
         }}
-        onBlur={() => runValidationTasks("games", games)}
-        errorMessage={errors.games?.errorMessage}
-        hasError={errors.games?.hasError}
-        {...getOverrideProps(overrides, "games")}
-      ></TextAreaField>
-      <TextAreaField
-        label="Experiences"
-        isRequired={false}
-        isReadOnly={false}
-        value={experiences}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              games,
-              experiences: value,
-              user_info,
-            };
-            const result = onChange(modelFields);
-            value = result?.experiences ?? value;
-          }
-          if (errors.experiences?.hasError) {
-            runValidationTasks("experiences", value);
-          }
-          setExperiences(value);
-        }}
-        onBlur={() => runValidationTasks("experiences", experiences)}
-        errorMessage={errors.experiences?.errorMessage}
-        hasError={errors.experiences?.hasError}
-        {...getOverrideProps(overrides, "experiences")}
-      ></TextAreaField>
-      <TextAreaField
-        label="User info"
-        isRequired={false}
-        isReadOnly={false}
-        value={user_info}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              games,
-              experiences,
-              user_info: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.user_info ?? value;
-          }
-          if (errors.user_info?.hasError) {
-            runValidationTasks("user_info", value);
-          }
-          setUser_info(value);
-        }}
-        onBlur={() => runValidationTasks("user_info", user_info)}
-        errorMessage={errors.user_info?.errorMessage}
-        hasError={errors.user_info?.hasError}
-        {...getOverrideProps(overrides, "user_info")}
+        onBlur={() => runValidationTasks("data", data)}
+        errorMessage={errors.data?.errorMessage}
+        hasError={errors.data?.hasError}
+        {...getOverrideProps(overrides, "data")}
       ></TextAreaField>
       <Flex
         justifyContent="space-between"

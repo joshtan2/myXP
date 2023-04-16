@@ -8,10 +8,10 @@
 import * as React from "react";
 import { Button, Flex, Grid, TextAreaField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { PlayerModel } from "../models";
+import { Data } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function PlayerModelCreateForm(props) {
+export default function DataCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -23,16 +23,32 @@ export default function PlayerModelCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    data: "",
+    games: "",
+    experiences: "",
+    user_info: "",
+    profile_img: "",
   };
-  const [data, setData] = React.useState(initialValues.data);
+  const [games, setGames] = React.useState(initialValues.games);
+  const [experiences, setExperiences] = React.useState(
+    initialValues.experiences
+  );
+  const [user_info, setUser_info] = React.useState(initialValues.user_info);
+  const [profile_img, setProfile_img] = React.useState(
+    initialValues.profile_img
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setData(initialValues.data);
+    setGames(initialValues.games);
+    setExperiences(initialValues.experiences);
+    setUser_info(initialValues.user_info);
+    setProfile_img(initialValues.profile_img);
     setErrors({});
   };
   const validations = {
-    data: [{ type: "JSON" }],
+    games: [{ type: "JSON" }],
+    experiences: [{ type: "JSON" }],
+    user_info: [{ type: "JSON" }],
+    profile_img: [{ type: "JSON" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -60,7 +76,10 @@ export default function PlayerModelCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          data,
+          games,
+          experiences,
+          user_info,
+          profile_img,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -90,7 +109,7 @@ export default function PlayerModelCreateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(new PlayerModel(modelFields));
+          await DataStore.save(new Data(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -103,31 +122,112 @@ export default function PlayerModelCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "PlayerModelCreateForm")}
+      {...getOverrideProps(overrides, "DataCreateForm")}
       {...rest}
     >
       <TextAreaField
-        label="Data"
+        label="Games"
         isRequired={false}
         isReadOnly={false}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              data: value,
+              games: value,
+              experiences,
+              user_info,
+              profile_img,
             };
             const result = onChange(modelFields);
-            value = result?.data ?? value;
+            value = result?.games ?? value;
           }
-          if (errors.data?.hasError) {
-            runValidationTasks("data", value);
+          if (errors.games?.hasError) {
+            runValidationTasks("games", value);
           }
-          setData(value);
+          setGames(value);
         }}
-        onBlur={() => runValidationTasks("data", data)}
-        errorMessage={errors.data?.errorMessage}
-        hasError={errors.data?.hasError}
-        {...getOverrideProps(overrides, "data")}
+        onBlur={() => runValidationTasks("games", games)}
+        errorMessage={errors.games?.errorMessage}
+        hasError={errors.games?.hasError}
+        {...getOverrideProps(overrides, "games")}
+      ></TextAreaField>
+      <TextAreaField
+        label="Experiences"
+        isRequired={false}
+        isReadOnly={false}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              games,
+              experiences: value,
+              user_info,
+              profile_img,
+            };
+            const result = onChange(modelFields);
+            value = result?.experiences ?? value;
+          }
+          if (errors.experiences?.hasError) {
+            runValidationTasks("experiences", value);
+          }
+          setExperiences(value);
+        }}
+        onBlur={() => runValidationTasks("experiences", experiences)}
+        errorMessage={errors.experiences?.errorMessage}
+        hasError={errors.experiences?.hasError}
+        {...getOverrideProps(overrides, "experiences")}
+      ></TextAreaField>
+      <TextAreaField
+        label="User info"
+        isRequired={false}
+        isReadOnly={false}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              games,
+              experiences,
+              user_info: value,
+              profile_img,
+            };
+            const result = onChange(modelFields);
+            value = result?.user_info ?? value;
+          }
+          if (errors.user_info?.hasError) {
+            runValidationTasks("user_info", value);
+          }
+          setUser_info(value);
+        }}
+        onBlur={() => runValidationTasks("user_info", user_info)}
+        errorMessage={errors.user_info?.errorMessage}
+        hasError={errors.user_info?.hasError}
+        {...getOverrideProps(overrides, "user_info")}
+      ></TextAreaField>
+      <TextAreaField
+        label="Profile img"
+        isRequired={false}
+        isReadOnly={false}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              games,
+              experiences,
+              user_info,
+              profile_img: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.profile_img ?? value;
+          }
+          if (errors.profile_img?.hasError) {
+            runValidationTasks("profile_img", value);
+          }
+          setProfile_img(value);
+        }}
+        onBlur={() => runValidationTasks("profile_img", profile_img)}
+        errorMessage={errors.profile_img?.errorMessage}
+        hasError={errors.profile_img?.hasError}
+        {...getOverrideProps(overrides, "profile_img")}
       ></TextAreaField>
       <Flex
         justifyContent="space-between"

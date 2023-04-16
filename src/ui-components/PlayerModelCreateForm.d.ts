@@ -13,21 +13,15 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type PlayerModelCreateFormInputValues = {
-    games?: string;
-    experiences?: string;
-    user_info?: string;
+    data?: string;
 };
 export declare type PlayerModelCreateFormValidationValues = {
-    games?: ValidationFunction<string>;
-    experiences?: ValidationFunction<string>;
-    user_info?: ValidationFunction<string>;
+    data?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type PlayerModelCreateFormOverridesProps = {
     PlayerModelCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    games?: PrimitiveOverrideProps<TextAreaFieldProps>;
-    experiences?: PrimitiveOverrideProps<TextAreaFieldProps>;
-    user_info?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    data?: PrimitiveOverrideProps<TextAreaFieldProps>;
 } & EscapeHatchProps;
 export declare type PlayerModelCreateFormProps = React.PropsWithChildren<{
     overrides?: PlayerModelCreateFormOverridesProps | undefined | null;
