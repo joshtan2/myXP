@@ -86,16 +86,7 @@ export const schema = {
                 "user_info": {
                     "name": "user_info",
                     "isArray": false,
-                    "type": {
-                        "nonModel": "UserInfo"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "user_id": {
-                    "name": "user_id",
-                    "isArray": false,
-                    "type": "String",
+                    "type": "AWSJSON",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -198,5 +189,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.0",
-    "version": "e989d4caf83b4494e7cad5e6f74cc2b2"
+    "version": "a5cd822cee2906c24e0e11d4c6bbf7b5"
 };

@@ -11,9 +11,6 @@ export const createTestModel = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -27,9 +24,6 @@ export const updateTestModel = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -43,9 +37,6 @@ export const deleteTestModel = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -58,21 +49,9 @@ export const createPlayerModel = /* GraphQL */ `
       id
       games
       experiences
-      user_info {
-        name
-        gamer_tag
-        email
-        pronouns
-        location
-        twitter
-        youtube
-      }
-      user_id
+      user_info
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -85,21 +64,9 @@ export const updatePlayerModel = /* GraphQL */ `
       id
       games
       experiences
-      user_info {
-        name
-        gamer_tag
-        email
-        pronouns
-        location
-        twitter
-        youtube
-      }
-      user_id
+      user_info
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -112,21 +79,9 @@ export const deletePlayerModel = /* GraphQL */ `
       id
       games
       experiences
-      user_info {
-        name
-        gamer_tag
-        email
-        pronouns
-        location
-        twitter
-        youtube
-      }
-      user_id
+      user_info
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

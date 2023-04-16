@@ -32,30 +32,10 @@ export default function LandingPage(props) {
     //     .then(result => console.log(result.data.stats.all))
     //     .catch(error => console.log('error', error));
     // })
-    //how to check if pereson in database
+    //how to check if person in database
     async function checkModels(){
     // const allTodos = await API.graphql({ query: queries.listPlayerModels });
     // console.log(allTodos);
-
-    // await DataStore.save(
-    //     new PlayerModel({
-    //         "games":  {fortnite:'test'},
-    //         "experiences":  {exp:'test'},
-    //         "user_info": new UserInfo({
-    //             name:'a',
-    //             gamer_tag:'b',
-    //             email: 'c',
-    //             pronouns: 'd',
-    //             location: 'e',
-    //             twitter:'f',
-    //             youtube:'g',
-    //             InGameNames: new GameNames({fortnite:'Prospеring',
-    //         callofduty:'none',
-    //         rainbowsix:'none'})
-    //         }),
-    //         "user_id": "testinguser1234"
-    //     })
-    // );
     // const detail = {
     //     id:'testing12345670',
     //     name:'james smith' 
@@ -64,17 +44,29 @@ export default function LandingPage(props) {
     //     query: mutations.createTestModel,
     //     variables: {input: detail}
     // })
-    const item = await API.graphql({
-        query: queries.getTestModel,
-        variables: { id: '123456' }
+    //How to fetch a single ID 
+    // const item = await API.graphql({
+    //     query: queries.getTestModel,
+    //     variables: { id: '123456' }
+    //   });
+    // console.log(item.data.getTestModel);
+    //How to update the name of a known ID
+    const todoDetails = {
+        id: '123456',
+        name: 'newName'
+      };
+      const updatedTodo = await API.graphql({ 
+        _version: 'current_version',
+        query: mutations.updateTestModel, 
+        variables: { input: todoDetails }
       });
-    console.log(item.data.getTestModel);
-    console.log('submitted');
+      console.log(updatedTodo);
+      
+      console.log("updated name");
     }
     return (
         <div className='landing-bg'>
             <div>
-
                 <button onClick={() => Auth.federatedSignIn({ provider: "Google" })}>Sign in w google</button>
                 <button onClick={checkModels}>Check user</button>
             </div>

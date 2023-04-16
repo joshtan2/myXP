@@ -8,9 +8,6 @@ export const getTestModel = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -26,39 +23,8 @@ export const listTestModels = /* GraphQL */ `
         name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncTestModels = /* GraphQL */ `
-  query SyncTestModels(
-    $filter: ModelTestModelFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncTestModels(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -68,21 +34,9 @@ export const getPlayerModel = /* GraphQL */ `
       id
       games
       experiences
-      user_info {
-        name
-        gamer_tag
-        email
-        pronouns
-        location
-        twitter
-        youtube
-      }
-      user_id
+      user_info
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -97,44 +51,11 @@ export const listPlayerModels = /* GraphQL */ `
         id
         games
         experiences
-        user_id
+        user_info
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPlayerModels = /* GraphQL */ `
-  query SyncPlayerModels(
-    $filter: ModelPlayerModelFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPlayerModels(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        games
-        experiences
-        user_id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;

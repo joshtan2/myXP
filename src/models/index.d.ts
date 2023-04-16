@@ -64,8 +64,7 @@ type EagerPlayerModel = {
   readonly id: string;
   readonly games?: string | null;
   readonly experiences?: string | null;
-  readonly user_info?: UserInfo | null;
-  readonly user_id?: string | null;
+  readonly user_info?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -78,8 +77,7 @@ type LazyPlayerModel = {
   readonly id: string;
   readonly games?: string | null;
   readonly experiences?: string | null;
-  readonly user_info?: UserInfo | null;
-  readonly user_id?: string | null;
+  readonly user_info?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
