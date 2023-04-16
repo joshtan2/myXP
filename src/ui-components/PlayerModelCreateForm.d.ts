@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextAreaFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -13,15 +13,24 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type PlayerModelCreateFormInputValues = {
-    data?: string;
+    games?: string;
+    experiences?: string;
+    user_info?: string;
+    profile_img?: string;
 };
 export declare type PlayerModelCreateFormValidationValues = {
-    data?: ValidationFunction<string>;
+    games?: ValidationFunction<string>;
+    experiences?: ValidationFunction<string>;
+    user_info?: ValidationFunction<string>;
+    profile_img?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type PlayerModelCreateFormOverridesProps = {
     PlayerModelCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    data?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    games?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    experiences?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    user_info?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    profile_img?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type PlayerModelCreateFormProps = React.PropsWithChildren<{
     overrides?: PlayerModelCreateFormOverridesProps | undefined | null;

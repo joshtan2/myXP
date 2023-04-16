@@ -6,6 +6,8 @@ import * as queries from '../graphql/queries';
 import { DataStore } from '@aws-amplify/datastore';
 import { TestModel, UserInfo } from '../models';
 import * as mutations from '../graphql/mutations';
+import { Collapse } from 'react-bootstrap';
+import { Storage } from 'aws-amplify';
 export default function LandingPage(props) {
 
     //how to access authenticated user
@@ -14,10 +16,26 @@ export default function LandingPage(props) {
         if (isLoggedIn){
         const user = await Auth.currentAuthenticatedUser()
         console.log('user: ', user);
-        checkModels(user);
+        // checkModels(user);
+        getPic(null)
         // makeTest();
+        //uploadPic
         }
 
+    }
+    async function uploadPic(){
+        const profilePicObj = null 
+        Storage.configure({region: 'us-east-2'})
+        const {key} = await Storage.put('user_id',profilePicObj, {contentType:'image/png'})
+    }
+    async function getPic(user){
+        try {
+            // const picURI = await Storage.get(user.data.getPlayerModel.profile_img , {expires:60})
+            const uri = await Storage.get('profile_pic.jpeg')
+            console.log(uri);
+        } catch (error) {
+            console.log(error)
+        }
     }
     async function logout(){
         const logout = await Auth.signOut();
@@ -53,6 +71,7 @@ export default function LandingPage(props) {
     // })
 
     //How to fetch a single ID 
+    console.log(value.username)
     const item = await API.graphql({
         query: queries.getPlayerModel,
         variables: { id:value.username }
@@ -79,12 +98,17 @@ export default function LandingPage(props) {
         console.log(player);
       }else{
         // they already have an account
-            //How to update the name of a known ID
+        //How to update the name of a known ID
+        const game= {fortnite: 'Prospering'}
+        const experiences= [{name:'title1'},{name:'title2'}]
+        const user_info= {name:'james smith', email:'testemail@gmail.com'}
+        console.log(item)
         const playerModel = {
-            id: item.id,
-            games: {fortnite: 'Prospering'},
-            experiences: [{name:'title1'},{name:'title2'}],
-            user_info: {name:'james smith', email:'testemail@gmail.com'}
+            id: item.data.getPlayerModel.id,
+            games: JSON.stringify(game),
+            experiences: JSON.stringify(experiences),
+            user_info: JSON.stringify(user_info),
+            profile_img: ""
         };
         const updatedTodo = await API.graphql({ 
             _version: 'current_version',
