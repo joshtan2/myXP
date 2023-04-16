@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { API } from 'aws-amplify';
 import * as queries from '../graphql/queries';
 import { DataStore } from '@aws-amplify/datastore';
-import { PlayerModel,UserInfo } from '../models';
+import { TestModel } from '../models';
 import * as mutations from '../graphql/mutations';
 export default function LandingPage(props) {
 
@@ -56,23 +56,20 @@ export default function LandingPage(props) {
     //         "user_id": "testinguser1234"
     //     })
     // );
-    const detail = {
-        'games': {value:'none'},
-        'experiences': {value:'none'},
-        "user_info": new UserInfo({
-            'name':'test'
-        }),
-        "user_id": "testing_a_user"
-    };
+    // const detail = {
+    //     id:'testing12345670',
+    //     name:'james smith' 
+    // };
+    // const item = await API.graphql({
+    //     query: mutations.createTestModel,
+    //     variables: {input: detail}
+    // })
     const item = await API.graphql({
-        query: mutations.createPlayerModel,
-        variables: {input: detail}
-    })
-    // const oneTodo = await API.graphql({
-    //     query: queries.getPlayerModel,
-    //     variables: { id: 'testinguser1234' }
-    //   });
-    console.log(item);
+        query: queries.getTestModel,
+        variables: { id: '123456' }
+      });
+    console.log(item.data.getTestModel);
+    console.log('submitted');
     }
     return (
         <div className='landing-bg'>
