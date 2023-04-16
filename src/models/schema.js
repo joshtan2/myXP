@@ -1,5 +1,64 @@
 export const schema = {
     "models": {
+        "TestModel": {
+            "name": "TestModel",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "TestModels",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "PlayerModel": {
             "name": "PlayerModel",
             "fields": {
@@ -83,32 +142,6 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {
-        "GameNames": {
-            "name": "GameNames",
-            "fields": {
-                "fortnite": {
-                    "name": "fortnite",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "callofduty": {
-                    "name": "callofduty",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "rainbowsix": {
-                    "name": "rainbowsix",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            }
-        },
         "UserInfo": {
             "name": "UserInfo",
             "fields": {
@@ -160,19 +193,10 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
-                },
-                "InGameNames": {
-                    "name": "InGameNames",
-                    "isArray": false,
-                    "type": {
-                        "nonModel": "GameNames"
-                    },
-                    "isRequired": false,
-                    "attributes": []
                 }
             }
         }
     },
     "codegenVersion": "3.4.0",
-    "version": "867511564a41bf32187a566aff274dfa"
+    "version": "e989d4caf83b4494e7cad5e6f74cc2b2"
 };

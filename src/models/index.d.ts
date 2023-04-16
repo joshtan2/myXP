@@ -4,22 +4,6 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 
 
-type EagerGameNames = {
-  readonly fortnite?: string | null;
-  readonly callofduty?: string | null;
-  readonly rainbowsix?: string | null;
-}
-
-type LazyGameNames = {
-  readonly fortnite?: string | null;
-  readonly callofduty?: string | null;
-  readonly rainbowsix?: string | null;
-}
-
-export declare type GameNames = LazyLoading extends LazyLoadingDisabled ? EagerGameNames : LazyGameNames
-
-export declare const GameNames: (new (init: ModelInit<GameNames>) => GameNames)
-
 type EagerUserInfo = {
   readonly name?: string | null;
   readonly gamer_tag?: string | null;
@@ -28,7 +12,6 @@ type EagerUserInfo = {
   readonly location?: string | null;
   readonly twitter?: string | null;
   readonly youtube?: string | null;
-  readonly InGameNames?: GameNames | null;
 }
 
 type LazyUserInfo = {
@@ -39,12 +22,39 @@ type LazyUserInfo = {
   readonly location?: string | null;
   readonly twitter?: string | null;
   readonly youtube?: string | null;
-  readonly InGameNames?: GameNames | null;
 }
 
 export declare type UserInfo = LazyLoading extends LazyLoadingDisabled ? EagerUserInfo : LazyUserInfo
 
 export declare const UserInfo: (new (init: ModelInit<UserInfo>) => UserInfo)
+
+type EagerTestModel = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<TestModel, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyTestModel = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<TestModel, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type TestModel = LazyLoading extends LazyLoadingDisabled ? EagerTestModel : LazyTestModel
+
+export declare const TestModel: (new (init: ModelInit<TestModel>) => TestModel) & {
+  copyOf(source: TestModel, mutator: (draft: MutableModel<TestModel>) => MutableModel<TestModel> | void): TestModel;
+}
 
 type EagerPlayerModel = {
   readonly [__modelMeta__]: {

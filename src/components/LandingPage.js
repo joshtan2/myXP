@@ -1,13 +1,18 @@
 import React from 'react';
-import { Auth } from 'aws-amplify';
+import { Auth, graphqlOperation } from 'aws-amplify';
 import { useState, useEffect } from 'react';
 import { API } from 'aws-amplify';
 import * as queries from '../graphql/queries';
+import { DataStore } from '@aws-amplify/datastore';
+import { PlayerModel,UserInfo } from '../models';
+import * as mutations from '../graphql/mutations';
 export default function LandingPage(props) {
 
     //how to access authenticated user
     async function checkUser() {
+        
         const user = await Auth.currentAuthenticatedUser()
+        
         console.log('user: ', user)
         checkModels();
     }
@@ -21,23 +26,60 @@ export default function LandingPage(props) {
     headers: myHeaders,
     redirect: 'follow'
     };
-    useEffect( ()=>{
-        fetch("https://fortnite-api.com/v2/stats/br/v2?name=Prospеring", requestOptions)
-        .then(response => response.json())
-        .then(result => console.log(result.data.stats.all))
-        .catch(error => console.log('error', error));
-    })
+    // useEffect( ()=>{
+    //     fetch("https://fortnite-api.com/v2/stats/br/v2?name=Prospеring", requestOptions)
+    //     .then(response => response.json())
+    //     .then(result => console.log(result.data.stats.all))
+    //     .catch(error => console.log('error', error));
+    // })
     //how to check if pereson in database
     async function checkModels(){
-    const allTodos = await API.graphql({ query: queries.listPlayerModels });
-    console.log(allTodos);
+    // const allTodos = await API.graphql({ query: queries.listPlayerModels });
+    // console.log(allTodos);
+
+    // await DataStore.save(
+    //     new PlayerModel({
+    //         "games":  {fortnite:'test'},
+    //         "experiences":  {exp:'test'},
+    //         "user_info": new UserInfo({
+    //             name:'a',
+    //             gamer_tag:'b',
+    //             email: 'c',
+    //             pronouns: 'd',
+    //             location: 'e',
+    //             twitter:'f',
+    //             youtube:'g',
+    //             InGameNames: new GameNames({fortnite:'Prospеring',
+    //         callofduty:'none',
+    //         rainbowsix:'none'})
+    //         }),
+    //         "user_id": "testinguser1234"
+    //     })
+    // );
+    const detail = {
+        'games': {value:'none'},
+        'experiences': {value:'none'},
+        "user_info": new UserInfo({
+            'name':'test'
+        }),
+        "user_id": "testing_a_user"
+    };
+    const item = await API.graphql({
+        query: mutations.createPlayerModel,
+        variables: {input: detail}
+    })
+    // const oneTodo = await API.graphql({
+    //     query: queries.getPlayerModel,
+    //     variables: { id: 'testinguser1234' }
+    //   });
+    console.log(item);
     }
     return (
         <div className='landing-bg'>
             <div>
 
                 <button onClick={() => Auth.federatedSignIn({ provider: "Google" })}>Sign in w google</button>
-                <button onClick={checkUser}>Check user</button>
+                <button onClick={checkModels}>Check user</button>
             </div>
             <div className='container'>
                 <div className='d-flex'>
