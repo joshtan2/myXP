@@ -36,12 +36,12 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-04-16T07:01:22.391Z",
+      "lastPushTimeStamp": "2023-04-16T20:33:51.021Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify1e0e405dfa8b4-staging-185100-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apimyXP"
       },
-      "lastPushDirHash": "mnENiB+yIiUglUg97QrU4ZqYIO8="
+      "lastPushDirHash": "pfg7zKll9tm1S0xxMjGL7x0Gn28="
     }
   },
   "auth": {
@@ -83,7 +83,7 @@
         "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://main.d1hjlbt9fxfen0.amplifyapp.com\"],\"LogoutURLs\":[\"https://main.d1hjlbt9fxfen0.amplifyapp.com\"]}",
         "UserPoolName": "myxpa5f2d689_userpool_a5f2d689"
       },
-      "lastPushTimeStamp": "2023-04-16T07:01:21.789Z",
+      "lastPushTimeStamp": "2023-04-16T20:33:51.023Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify1e0e405dfa8b4-staging-185100-deployment/amplify-cfn-templates/auth/myxpa5f2d689-cloudformation-template.json",
         "logicalId": "authmyxpa5f2d689"
@@ -99,7 +99,7 @@
         "BucketName": "myxp-storage185100-staging",
         "Region": "us-east-2"
       },
-      "lastPushTimeStamp": "2023-04-16T07:01:21.790Z",
+      "lastPushTimeStamp": "2023-04-16T20:33:52.087Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify1e0e405dfa8b4-staging-185100-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storages3myxpstorage"
